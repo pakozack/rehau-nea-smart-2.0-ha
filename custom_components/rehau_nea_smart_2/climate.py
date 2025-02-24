@@ -181,9 +181,9 @@ class RehauNeaSmart2RoomClimate(IntegrationRehauNeaSmart2Climate):
             if channel.target_temperature is not None: 
                 return self.format_temperature(channel.target_temperature, True) if channel.target_temperature>0 else self.format_temperature(channel.current_temperature, True)
             else:
-                return None
+                return self.format_temperature(channel.current_temperature, True)
 
-        return self._attr_target_temperature
+        return self._attr_target_temperature if self._target_temp>0 else _attr_current_temperature 
 
     @property
     def current_humidity(self) -> float | None:
